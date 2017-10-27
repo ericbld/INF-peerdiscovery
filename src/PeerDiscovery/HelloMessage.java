@@ -7,6 +7,9 @@ package PeerDiscovery;
 
 import java.util.List;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  *
@@ -33,8 +36,11 @@ public class HelloMessage {
 		if(slist.length < 5){
 			throw new Exception("Missing arguments in the hello string");
 		}
+		
+		Pattern helloPattern = Pattern.compile("(h|H)(e|E)(l|L){2}(o|O)");
+		Matcher helloMatcher = helloPattern.matcher(slist[0]);
 
-		if(!slist[0].equals(HELLO))
+		if(!helloMatcher.matches())
 		{
 			throw new Exception("Not a Hello message");
 		}
